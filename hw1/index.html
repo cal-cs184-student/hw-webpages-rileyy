@@ -52,12 +52,12 @@
 
 		<h2>Task 1: Drawing Single-Color Triangles</h2>
 		In order to rasterize a triangle given the x's and y's of a triangle's three vertices, I basically take each point in the image and determine where each point lies relative to each of the three lines in the triangle.  Each line of the triangle creates two opposite planes, and all the points inside the triangle will be on the same side of each of the lines (when the lines are formed clockwise or counterclockwise).  When plugged into the line test formula, when the three tests come out as all positive or all negative, it means that the point is inside the triangle. <br>
-		
+		<br>
 		In my case, I wanted to count points as inside the triangle when the center of its pixel (x+0.5, y+0.5) was inside.  My algorithm is no worse than one that checks each sample within the bounding box of the triangle, because that is exacly what I did: I found the min and max x's and y's and only checked the points within that area.
 
 		<figure>
-			<img src="images/basictest4.png"/>
-			<figcaption>You can add images with captions!</figcaption>
+			<img src="images/basictest4task1.png"/>
+			<figcaption>Basic Test 4 Rasterization</figcaption>
 		</figure>
 
 		<p>Here is an example 2x2 gridlike structure using an HTML table. Each <b>tr</b> is a row and each <b>td</b> is a column in that row. You might find this useful for framing and showing your result images in an organized fashion.</p>
@@ -87,7 +87,26 @@
 		</div>
 		
 		<h2>Task 2: Antialiasing by Supersampling</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		In order to antialias my triangles, I performed supersampling by assigning color values to each pixel depending on the amount of subpixels that are wtihin the triangle.  The basic idea behind supersampling here is that I increased the resolution of the image by a factor of some 'sample_rate' and rasterized on this bigger image.  Then, I assigned each pixel the average color value of its subpixels, so that pixels along the jagged edges would look less jagged because the on-the-border edges would have muted colors. <br>
+		<br>
+		The modifications to the original pipeline were the inclusion of subpixel values in the run-through of the three line test as well as the filling of these subpixels.  I also had to update fill_pixel(), resolve_to_framebuffer(), set_framebuffer_target(), and set_sample_rate() to work with my supersampling code.  <br>
+		<br>
+		The figures below show basic test 4 at different rates of supersampling (1, 4, 16).  The higher the rate, the more subpixels were used.  This means that images with higher rates have smoother edges and less or no gaps, especially when comparing very small corners of triangles.  
+
+		<figure>
+			<img src="images/basictest4task2rate1.png"/>
+			<figcaption>Basic Test 4 Supersampling Rate 1</figcaption>
+		</figure>
+
+		<figure>
+			<img src="images/basictest4task2rate4.png"/>
+			<figcaption>Basic Test 4 Supersampling Rate 4</figcaption>
+		</figure>
+
+		<figure>
+			<img src="images/basictest4task2rate16.png"/>
+			<figcaption>Basic Test 4 Supersampling Rate 16</figcaption>
+		</figure>
 
 		<h2>Task 3: Transforms</h2>
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
