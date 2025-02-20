@@ -132,7 +132,34 @@
 		</figure>
 
 		<h2>Task 5: "Pixel sampling" for texture mapping</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		Pixel sampling is a way of determining the color of a pixel in order to create texture in an image.  It is a way to 'wrap' a 2d image onto a 3d object.  I basically took the coordinates from the higher object and turned them into texture coordinates that are able to be mapped onto a texture to find its new color value. The two pixel sampling methods I used were nearest sampling, which pulls from the nearest color on the texture, and bilinear sampling, which interpolates between the 4 pixels around it. <br>
+		<br>
+		Shown below are a comparison between combinations of nearest and bilinear sampling as well as 1 and 16 samples per pixel on texmap2.  When comparing nearest to bilinear, the bilinear side has much more smooth lines, especially when looking at the skinny latitude and longitude lines which are clearly more jagged on the nearest.  Similarly, the 16 samples are much more clear and smooth than the 1 sample ones. Large differences appear between these pictures when closely examining or zooming in on the edges and skinny lines.  This is because adding samples and doing bilinear generally increase blending and smoothing out of lines in order to decrease jaggies.
+
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="images/texmap2task5near1.png" width="400px"/>
+				  <figcaption>Sample Nearest: 1 Sample Per Pixel</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="images/texmap2task5bilinear1.png" width="400px"/>
+				  <figcaption>Sample Bilinear: 1 Sample Per Pixel</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="images/texmap2task5near16.png" width="400px"/>
+				  <figcaption>Sample Nearest: 16 Samples Per Pixel.</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="images/texmap2task5bilinear16.png" width="400px"/>
+				  <figcaption>Sample Bilinear: 16 Samples Per Pixel</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
 
 		<h2>Task 6: "Level Sampling" with mipmaps for texture mapping</h2>
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
