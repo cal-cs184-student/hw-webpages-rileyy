@@ -113,7 +113,23 @@
 		<h2>Section II: Triangle Meshes and Half-Edge Data Structure</h2>
 
 		<h3>Part 3: Area-weighted vertex normals</h3>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		Area-weighted vertex normals at vertices allow for enhanced shading on smooth surfaces by basically giving vertices a normal vector created from area-weighting and averaging the normal vectors of each triangle that the vertex is a part of.  I used half-edges to navigate easily through the surrounding triangles, taking each of their areas and normal vectors.  I weighted the normal vectors by multiplying them by their area and at the end divided the total normal vector by the total area and normalized. <br>
+
+		<p>Teapot With and Without Area-Weighted Vertex Normals</p>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="s2p3_og.png" width="400px"/>
+				  <figcaption>Original Teapot</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="s2p3_vert_norm.png" width="400px"/>
+				  <figcaption>Vertex Normals Teapot</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
 
 		<h3>Part 4: Edge flip</h3>
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
