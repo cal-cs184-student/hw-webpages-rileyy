@@ -179,21 +179,76 @@
 		</div>
 
 		<h3>Part 6: Loop subdivision for mesh upsampling</h3>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		The main goal of upsampling using loop subdivision is to create a higher resolution of your polygon mesh and, in this case, I have done 4-1 subdivisions on all triangles using loop subdivision. In order to do this, I first calculated all new and updated vertex positions using the original mesh, then I started to split and flip the necessary edges.  Afterwards, I updated the vertices with their new positions.  Debugging was pretty difficult but I used print statements to flag which steps were being performed as well as the number of halfedge elements in the mesh to make sure nothing extra is being created. <br><br>
 
-		<h2>(Optional) Section III: Potential Extra Credit - Art Competition: Model something Creative</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		The below images show a cube being upsampled 1 to 4 times. After loop subdivision, the sharp corners and edges round out and become less pointed and jagged. This smoothing can be slightly reduced by pre-splitting edges, because presplitting edges will preserve the original shape of the mesh more as the vertices won't move as drastically. <br><br>
 
-		<h2>Additional Notes (please remove)</h2>
-		<ul>
-			<li>You can also add code if you'd like as so: <code>code code code</code></li>
-			<li>If you'd like to add math equations, 
-				<ul>
-					<li>You can write inline equations like so: \( a^2 + b^2 = c^2 \)</li>
-					<li>You can write display equations like so: \[ a^2 + b^2 = c^2 \]</li>
-				</ul>
-			</li>
-		</ul>
+		<p>Cube Mesh Upsampling</p>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="s2p6_subdiv0.png" width="400px"/>
+				  <figcaption>Original Cube</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="s2p6_subdiv1.png" width="400px"/>
+				  <figcaption>Cube 1 Upsample</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="s2p6_subdiv2.png" width="400px"/>
+				  <figcaption>Cube 2 Upsamples</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="s2p6_subdiv3.png" width="400px"/>
+				  <figcaption>Cube 3 Upsamples</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="s2p6_subdiv4.png" width="400px"/>
+				  <figcaption>Cube 4 Upsamples</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
+
+		I then preprocessed the cube by adding in flips and splits before all of the previous steps, allowing for a more symmetrical upsampling.  By adding splits on certain edges, the vertices all became symmetrical degrees and the edges ended up splitting into even surfaces that were all more similar than without preprocessing. <br><br>
+
+		<p>Cube Mesh Upsampling With Preprocessing</p>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="s2p6_subdiv0.png" width="400px"/>
+				  <figcaption>Original Cube</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="s2p6_prep1.png" width="400px"/>
+				  <figcaption>Preprocessed Cube 1 Upsample</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="s2p6_prep2.png" width="400px"/>
+				  <figcaption>Preprocessed Cube 2 Upsamples</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="s2p6_prep3.png" width="400px"/>
+				  <figcaption>Preprocessed Cube 3 Upsamples</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="s2p6_prep4.png" width="400px"/>
+				  <figcaption>Preprocessed Cube 4 Upsamples</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
+
 		</div>
 	</body>
 </html>
