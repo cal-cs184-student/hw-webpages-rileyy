@@ -150,7 +150,33 @@
 		</div>
 
 		<h3>Part 5: Edge split</h3>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		Edge splitting entails a similar process as edge flipping: tracking all elements of a base mesh and updating them in order to split the given edge. However, edge splitting also invovles creating a vertex and a few edges, halfedges, and faces, making tracking the elements much more complicated.  Luckily, I followed the same process I used on the edge flipping which is drawing the base structure itself and carefully updating everything to plan.  This very much helped as I had almost no debugging except for just forgetting that I had to set a vertex location for the added vertex. <br>
+
+		<p>Teapot With and Without Edge Splits and Edge Flips</p>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="s2p5_og.png" width="400px"/>
+				  <figcaption>Original Teapot</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="s2p5_split.png" width="400px"/>
+				  <figcaption>With Edge Splits</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="s2p5_split_flip.png" width="400px"/>
+				  <figcaption>With Edge Splits and Edge Flips</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="s2p5_split_flip2.png" width="400px"/>
+				  <figcaption>Edge Splits and Edge Flips Side View</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
 
 		<h3>Part 6: Loop subdivision for mesh upsampling</h3>
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
