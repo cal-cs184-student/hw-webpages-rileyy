@@ -133,6 +133,7 @@
 			  </tr>
 			</table>
 		</div>
+		<br>
 
 		Compared to the rendering times in part 1, the Bounding Volume Hierarchy acceleration significantly optimizes rendering scenes with moderately complex geometries. For instance, the cow goes from 21.2960s to a 0.0820s rendering time. Similarly, the beast, a more complex geometry, goes from 276.3363s to 0.0701s. Lastly, even the teapot goes from 8.8300s to 0.0682s. The PathTracer information printed for me during rendering shows how for the beast's BVH acceleration, the average speed was almost 6 million rays per second whereas its original speed was 0.0016 million rays per second, showing such a huge difference. All of the BVH accelerations dropped the times to less than a second whereas you can see that without it, the more complex geometries can get into super long rendering times.  <br><br>
 
@@ -190,6 +191,7 @@
 			  </tr>
 			</table>
 		</div>
+		<br>
 
 		I focused on the dragon scene and rendered with 1 sample per pixel and 1/4/16/64 light rays using direct lighting importance sampling as shown below. With only one light ray, the image is very noisy with only the main shapes and most contrasting shadows being super discernable.  As I add more light rays, the image becomes much smoother and the noise goes down considerably.  The soft shadows are much clearer which make the areas with a lighter shadow more defined compared to the previous iterations.  An example of this can be seen if you compare the shadow behind (the the top left of) the dragon which is not noticeable in the 1 light ray one but very clear in the 64 ray image.  <br><br>
 
@@ -220,7 +222,9 @@
 		</div>
 
 		<h2>Part 4: Global Illumination</h2>
-		_+__+_+__Walk through your implementation of the indirect lighting function <br><br>
+		In order to get global illumination, I link the direct illumination created in the previous part to a new indirect illumination which builds off of the one_bounce_radiance function I made before.  My new function which supports multiple bounces of light rays recursively adds a term from Monte Carlo sum of paths which accumulates the amount of light on an object by how the light source's rays reach it.  It is generally a similar structure to the one_bounce_radiance function from before as it finds a direction sample from the intersection point and makes a new ray. Then, I add the point's one_bounce_radiance as well as the result from the recursive call over the new ray along with multiplicative factors like the light sample, cos theta, and pdf. Then the light can build up over time and places unable to be reached by direct light can be illuminated.   <br><br>
+
+		I also had to account for other factors like the maximum depth which returns at a certain amount of bounces, a russian roulette feature which returned the light value randomly to allow for random bounce depths, and the isAccumBounces boolean which, if false, only shows the light from the depth set by the max_ray_depth which shows isolated light bounce levels. <br><br>
 
 		<p>Global Illumination Images 1024 Samples per Pixel</p>
 		<div style="display: flex; flex-direction: column; align-items: center;">
@@ -237,6 +241,7 @@
 			  </tr>
 			</table>
 		</div>
+		<br>
 
 		The following spheres scene compares direct illumination versus indirect illumination. The direct scene has more vivid colors and lights whereas the indirect scene is more dull and muted.  This is because the indirect scene is only getting secondhand light reflection, not from the source directly. <br><br>
 
@@ -255,6 +260,7 @@
 			  </tr>
 			</table>
 		</div>
+		<br>
 
 		Below shows CBbunny rendered with (0,1,2,3,4,5) bounces of light (max_ray_depth), first without accumulating bounces and then with accumulating bounces. When isolating the 2nd and 3rd bounce of light in the non-accumulating bunny images, the color of the walls start to bleed onto the bunny as the light reflected the color from the walls onto the bunny.  This by itself gives an edge over rasterization because it would be very difficult for rasterization to receive information from across the scene, showing how light rays seem to be a very easy way of showing realism in light and color reflection.  <br><br>
 
@@ -291,6 +297,7 @@
 			  </tr>
 			</table>
 		</div>
+		<br>
 
 		Comparing the accumulating vs the unaccumulating bounces, the unaccumulating images become dull quickly as the light is fading seen through comparing 1 bounce to 2 bounces.  On the other hand, the accumulating images keep their color and light very well, the thing fading the most over bounces being the color contrast.  By the end, the image has less contrasting colors than before but the walls are more colored than the unaccumulated. <br><br>
 
@@ -327,6 +334,7 @@
 			  </tr>
 			</table>
 		</div>
+		<br>
 
 		Below shows CBbunny Russian Roulette rendered with (0,1,2,3,4,100) bounces of light (max_ray_depth).  <br><br>
 
@@ -363,8 +371,9 @@
 			  </tr>
 			</table>
 		</div>
+		<br>
 
-		Below shows Spheres rendered with (1,2,4,8,16,64,1024) sample per pixel rates.  <br><br>
+		Below shows Spheres rendered with (1,2,4,8,16,64,1024) sample per pixel rates. The higher the sample per pixel rate, the less grainy and the more clear it is.  Most of the first sphere scenes have a ton of static, which really only clears up in the last couple ones, with the 1024 sample rate one being very clear.   <br><br>
 
 		<p>Spheres with (1,2,4,8,16,64,1024) Sample per Pixel Rates</p>
 		<div style="display: flex; flex-direction: column; align-items: center;">
