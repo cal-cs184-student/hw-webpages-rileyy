@@ -220,7 +220,191 @@
 		</div>
 
 		<h2>Part 4: Global Illumination</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		_+__+_+__Walk through your implementation of the indirect lighting function <br><br>
+
+		<p>Global Illumination Images 1024 Samples per Pixel</p>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="spheres_1024.png" width="400px"/>
+				  <figcaption>Global Illumination Spheres with 1024 Samples per Pixel</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="CBbunny_1024.png" width="400px"/>
+				  <figcaption>Global Illumination Bunny with 1024 Samples per Pixel</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
+
+		The following spheres scene compares direct illumination versus indirect illumination. The direct scene has more vivid colors and lights whereas the indirect scene is more dull and muted.  This is because the indirect scene is only getting secondhand light reflection, not from the source directly. <br><br>
+
+		<p>Direct Versus Indirect Illumination Images 1024 Samples per Pixel</p>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="spheres_direct.png" width="400px"/>
+				  <figcaption>Direct Illumination Spheres with 1024 Samples per Pixel</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="spheres_indirect.png" width="400px"/>
+				  <figcaption>Indirect Illumination Spheres with 1024 Samples per Pixel</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
+
+		Below shows CBbunny rendered with (0,1,2,3,4,5) bounces of light (max_ray_depth), first without accumulating bounces and then with accumulating bounces. When isolating the 2nd and 3rd bounce of light in the non-accumulating bunny images, the color of the walls start to bleed onto the bunny as the light reflected the color from the walls onto the bunny.  This by itself gives an edge over rasterization because it would be very difficult for rasterization to receive information from across the scene, showing how light rays seem to be a very easy way of showing realism in light and color reflection.  <br><br>
+
+		<p>CBbunny WITHOUT Accumulating Bounces with Max Ray Depth (0,1,2,3,4,5)</p>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="CBbunny_m0.png" width="250px"/>
+				  <figcaption>Bunny with 0 Light Bounces and No Accumulation</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="CBbunny_m1.png" width="250px"/>
+				  <figcaption>Bunny with 1 Light Bounce and No Accumulation</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="CBbunny_m2.png" width="250px"/>
+				  <figcaption>Bunny with 2 Light Bounces and No Accumulation</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="CBbunny_m3.png" width="250px"/>
+				  <figcaption>Bunny with 3 Light Bounces and No Accumulation</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="CBbunny_m4.png" width="250px"/>
+				  <figcaption>Bunny with 4 Light Bounces and No Accumulation</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="CBbunny_m5.png" width="250px"/>
+				  <figcaption>Bunny with 5 Light Bounces and No Accumulation</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
+
+		Comparing the accumulating vs the unaccumulating bounces, the unaccumulating images become dull quickly as the light is fading seen through comparing 1 bounce to 2 bounces.  On the other hand, the accumulating images keep their color and light very well, the thing fading the most over bounces being the color contrast.  By the end, the image has less contrasting colors than before but the walls are more colored than the unaccumulated. <br><br>
+
+		<p>CBbunny WITH Accumulating Bounces with Max Ray Depth (0,1,2,3,4,5)</p>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="CBbunny_m0_acc.png" width="250px"/>
+				  <figcaption>Bunny with 0 Light Bounces and Accumulation</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="CBbunny_m1_acc.png" width="250px"/>
+				  <figcaption>Bunny with 1 Light Bounce and Accumulation</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="CBbunny_m2_acc.png" width="250px"/>
+				  <figcaption>Bunny with 2 Light Bounces and Accumulation</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="CBbunny_m3_acc.png" width="250px"/>
+				  <figcaption>Bunny with 3 Light Bounces and Accumulation</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="CBbunny_m4_acc.png" width="250px"/>
+				  <figcaption>Bunny with 4 Light Bounces and Accumulation</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="CBbunny_m5_acc.png" width="250px"/>
+				  <figcaption>Bunny with 5 Light Bounces and Accumulation</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
+
+		Below shows CBbunny Russian Roulette rendered with (0,1,2,3,4,100) bounces of light (max_ray_depth).  <br><br>
+
+		<p>CBbunny Russian Roulette with Max Ray Depth (0,1,2,3,4,100)</p>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="CBbunny_m0_rr.png" width="250px"/>
+				  <figcaption>Bunny with 0 Light Bounces and Russian Roulette</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="CBbunny_m1_rr.png" width="250px"/>
+				  <figcaption>Bunny with 1 Light Bounce and Russian Roulette</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="CBbunny_m2_rr.png" width="250px"/>
+				  <figcaption>Bunny with 2 Light Bounces and Russian Roulette</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="CBbunny_m3_rr.png" width="250px"/>
+				  <figcaption>Bunny with 3 Light Bounces and Russian Roulette</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="CBbunny_m4_rr.png" width="250px"/>
+				  <figcaption>Bunny with 4 Light Bounces and Russian Roulette</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="CBbunny_m100_rr.png" width="250px"/>
+				  <figcaption>Bunny with 100 Light Bounces and Russian Roulette</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
+
+		Below shows Spheres rendered with (1,2,4,8,16,64,1024) sample per pixel rates.  <br><br>
+
+		<p>Spheres with (1,2,4,8,16,64,1024) Sample per Pixel Rates</p>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="spheres_s1.png" width="250px"/>
+				  <figcaption>Sphere with 1 Sample per Pixel</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="spheres_s2.png" width="250px"/>
+				  <figcaption>Sphere with 2 Samples per Pixel</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="spheres_s4.png" width="250px"/>
+				  <figcaption>Sphere with 4 Samples per Pixel</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="spheres_s8.png" width="250px"/>
+				  <figcaption>Sphere with 8 Samples per Pixel</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="spheres_s16.png" width="250px"/>
+				  <figcaption>Sphere with 16 Samples per Pixel</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="spheres_s64.png" width="250px"/>
+				  <figcaption>Sphere with 64 Samples per Pixel</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="spheres_s1024.png" width="250px"/>
+				  <figcaption>Sphere with 1024 Samples per Pixel</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
 
 		<h2>Part 5: Adaptive Sampling</h2>
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
