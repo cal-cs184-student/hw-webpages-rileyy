@@ -32,7 +32,7 @@
 
 		<br>
 
-		Link to webpage: <a href="https://cal-cs184-student.github.io/hw-webpages-rileyy/hw3/index.html">https://cal-cs184-student.github.io/hw-webpages-rileyy/hw3/index.html</a>
+		Link to webpage: <a href="https://cal-cs184-student.github.io/hw-webpages-rileyy/hw3/index.html">https://cal-cs184-student.github.io/hw-webpages-rileyy/hw3/index.html</a> <br>
 		Link to GitHub repository: <a href="https://github.com/cal-cs184-student/sp25-hw3-rileyyy">https://github.com/cal-cs184-student/sp25-hw3-rileyyy</a>
 		
 		<figure>
@@ -159,7 +159,65 @@
 		</div>
 
 		<h2>Part 3: Direct Illumination</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		To implement direct lighting with uniform hemisphere sampling, I am estimating the light that reaches the camera from some intersection point that is reflecting light.  The process involves sampling a certain amount of rays that would reach the camera from the intersection point, which in this case is a uniform sample from the hemisphere. Then I check if these samples then intersect an light source (i.e. a light would shine on a reflection point which would secondarily shine onto the camera). Then, I use these values to form the Monte Carlo estimator for the reflection equation, estimating the light in the scene.  <br><br>
+
+		The direct lighting by importance sampling is a similar process and structure to the previous method. The main difference is that I am sampling all of the lights directly, the main purpose being that it allows for lights originating from a single point. The main idea of this method is that I am sampling light rays and seeing if they hit the hit point, i.e. seeing if light is being shone on them.  In this method, I sample a certain amount from each light source, and only adding the light reflection term if the light ray is not intersecting another object on the way to the point.  Then, I can calculate the Monte Carlo estimator for the reflection equation like before. <br><br>
+
+		Comparing the uniform hemisphere sampling and lighting sampling, sampling the lights themselves clearly make a huge difference in the results as well as allowing for point lights whereas uniform hemisphere sampling basically makes it impossible to find the point lights.  When comparing these two sampling methods with the exact same parameters, the importance sampling has strikingly better results visually.  There is much less static in the importance sampling and a much clearer rendering overall.  It also took a shorter amount of time to render, which is surprising because of how much of a visual difference there is. Even the testing images that I used for the importance sampling one, which was using 1 camera ray per pixel, 1 sample per area light, and 1 max ray depth, was not much worse than some of the uniform hemisphere results.  <br><br>
+
+		<p>Direct Lighting Scenes with Uniform Hemisphere Sampling vs Importance Sampling</p>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="CBbunny_H_16_8.png" width="400px"/>
+				  <figcaption>Uniform Hemisphere Sampling CBbunny_H_16_8</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="CBbunny_H_64_32.png" width="400px"/>
+				  <figcaption>Uniform Hemisphere Sampling CBbunny_H_64_32</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="bunny_64_32.png" width="400px"/>
+				  <figcaption>Importance Sampling bunny_64_32</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="dragon_64_32.png" width="400px"/>
+				  <figcaption>Importance Sampling dragon_64_32</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
+
+		I focused on the dragon scene and rendered with 1 sample per pixel and 1/4/16/64 light rays using direct lighting importance sampling as shown below. With only one light ray, the image is very noisy with only the main shapes and most contrasting shadows being super discernable.  As I add more light rays, the image becomes much smoother and the noise goes down considerably.  The soft shadows are much clearer which make the areas with a lighter shadow more defined compared to the previous iterations.  An example of this can be seen if you compare the shadow behind (the the top left of) the dragon which is not noticeable in the 1 light ray one but very clear in the 64 ray image.  <br><br>
+
+		<p>Direct Lighting Importance Sampling with Varying Amounts of Light Rays</p>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="dragon_1_1.png" width="400px"/>
+				  <figcaption>Dragon with 1 Light Ray and 1 Sample per Pixel</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="dragon_4_1.png" width="400px"/>
+				  <figcaption>Dragon with 4 Light Rays and 1 Sample per Pixel</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="dragon_16_1.png" width="400px"/>
+				  <figcaption>Dragon with 16 Light Rays and 1 Sample per Pixel</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="dragon_64_1.png" width="400px"/>
+				  <figcaption>Dragon with 64 Light Rays and 1 Sample per Pixel</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
 
 		<h2>Part 4: Global Illumination</h2>
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
