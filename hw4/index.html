@@ -68,17 +68,17 @@
 			<table style="width: 100%; text-align: center; border-collapse: collapse;">
 			  <tr>
 				<td style="text-align: center;">
-				  <img src="p1_1.png" width="400px"/>
+				  <img src="p1_replacements_1.png" width="400px"/>
 				  <figcaption>Without Shearing Constraints</figcaption>
 				</td>
 				<td style="text-align: center;">
-				  <img src="p1_5.png" width="400px"/>
+				  <img src="p1_replacements_3.png" width="400px"/>
 				  <figcaption>With Only Shearing Constraints</figcaption>
 				</td>
 			  </tr>
 			  <tr>
 				<td style="text-align: center;">
-				  <img src="p1_4.png" width="400px"/>
+				  <img src="p1_replacements_2.png" width="400px"/>
 				  <figcaption>With All Constraints</figcaption>
 				</td>
 			  </tr>
@@ -86,7 +86,128 @@
 		</div>
 
 		<h2>Part 2: Simulation via numerical integration</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		The following compares the normal shaded cloth falling with various pin amounts, spring constants, densities, and damping values.
+
+		<p>Original Cloth: ks=5000, density=15, damping=0.2</p>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="p2_og_1.png" width="400px"/>
+				  <figcaption></figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="p2_og_2.png" width="400px"/>
+				  <figcaption></figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
+		<br><br>
+
+		The examples with different spring constants shown below demonstrated how the higher spring constant kept the cloth from moving very much and did not allow for much stretching and bending.  The lower spring constant allowed the cloth to deform and stretch more easily, forming more arcs and curved lines than is seen in the higher ks examples. Overall, the higher ks made the cloth feel more rigid and stable compared to the low ks which was bouncy and loose.
+
+		<p>Normal Cloth With Different Spring Constants ks </p>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="p2_ks100000_1.png" width="400px"/>
+				  <figcaption>Spring Constant ks=100000</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="p2_ks100000_2.png" width="400px"/>
+				  <figcaption>Spring Constant ks=100000</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="p2_ks100_1.png" width="400px"/>
+				  <figcaption>Spring Constant ks=100</figcaption>
+				</td>
+				<td style="text-align: center;">
+					<img src="p2_ks100_2.png" width="400px"/>
+					<figcaption>Spring Constant ks=100</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
+		<br><br>
+
+		The examples with different densities shown below demonstrate how a higher density gives more weight to each point, making the cloth feel more affected by gravity.  The cloth just felt heavy in general as it droops down under its own weight.  When the density is low though, the fall is less snappy and more feather-like.  The cloth seems to more smoothly drift to its resting position, as gravity has less of an effect on its movement.
+
+		<p>Normal Cloth With Different Densities </p>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="p2_dens100_1.png" width="400px"/>
+				  <figcaption>Density=100</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="p2_dens100_2.png" width="400px"/>
+				  <figcaption>Density=100</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="p2_dens1_1.png" width="400px"/>
+				  <figcaption>Density=1</figcaption>
+				</td>
+				<td style="text-align: center;">
+					<img src="p2_dens1_2.png" width="400px"/>
+					<figcaption>Density=1</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
+		<br><br>
+
+		The examples with different damping values shown below demonstrates how the high damping value makes the cloth resist movement faster, decelerating to its resting position faster.  It does not seem to have any wasted motion, which is very unlike its counterpart of low damping value which jumps and bounces around a lot.  It took a long time to get to an almost static position, with the bottom corners still moving after a decent amount of time.  The damping value seems to show different levels of energy loss in the cloth's movement.
+
+		<p>Normal Cloth With Different Damping Values </p>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="p2_damp40_1.png" width="400px"/>
+				  <figcaption>Damping=40%</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="p2_damp40_2.png" width="400px"/>
+				  <figcaption>Damping=40%</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="p2_damp1_1.png" width="400px"/>
+				  <figcaption>Damping=1%</figcaption>
+				</td>
+				<td style="text-align: center;">
+					<img src="p2_damp1_2.png" width="400px"/>
+					<figcaption>Damping=1%</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
+		<br><br>
+
+		<p>Normal Cloth With 4 Pins </p>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="p2_pin4_1.png" width="400px"/>
+				  <figcaption>4 Pins</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="p2_pin4_2.png" width="400px"/>
+				  <figcaption>4 Pins</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
+		<br><br>
 
 		<h2>Part 3: Handling collisions with other objects</h2>
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
