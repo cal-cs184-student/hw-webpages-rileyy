@@ -210,7 +210,47 @@
 		<br><br>
 
 		<h2>Part 3: Handling collisions with other objects</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		The main idea to follow when implementing how to handle collisions with spheres and planes is to kind of bump the point mass up to the closest area outside of the object (adjusting for friction and the last position and what not).  For both, I first have to determine if the point mass is in the object by using the fundamental structures of the objects like the radius of the sphere.  Then, I am finding the tangent point which is kind of like the best legal point representing the resulting 'bad' position. I then calculate the correction vector which is the adjustment needed to move the point mass's last position to the tangent point (or right above the tangent point).  Finally, point's last position adjusted by the friction-scaled correction vector becomes the point mass's new position. <br><br>
+
+		The cloth collision with the sphere at spring constant values of 500, 5000, and 50000 are shown below.  As expected, the higher the spring constant is, the more stiff and rigid it is.  This is greatly shown by how ks=500 can almost see the whole outline of the top of the sphere whereas in ks=50000 you can barely tell it is a sphere because of how tough the cloth is.  
+
+		<p>Cloth Sphere Collision With Varying Spring Constants </p>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="p4_sphere_2.png" width="400px"/>
+				  <figcaption>Spring Constant = 500</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="p4_sphere_3.png" width="400px"/>
+				  <figcaption>Spring Constant = 50000</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="p4_sphere_1.png" width="400px"/>
+				  <figcaption>Spring Constant = 5000</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
+
+		<p>Cloth Plane Peaceful Collision </p>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="p4_plane_1.png" width="400px"/>
+				  <figcaption>Cloth Plane Shaded</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="p4_plane_2.png" width="400px"/>
+				  <figcaption>Cloth Plane Wireframe</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
 
 		<h2>Part 4: Handling self-collisions</h2>
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
