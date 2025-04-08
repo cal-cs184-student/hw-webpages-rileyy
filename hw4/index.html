@@ -342,7 +342,133 @@
 		
 
 		<h2>Part 5: Shaders</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		Shader programs control the visuals of a scene, adding things like adding color and lighting, and run much faster and more efficiently than other methods like raytracing.  This is mostly because it utilizes the GPU to run a lot of graphics sections in parallel with a specialized and efficient input/output structure. <br><br>  
+		The two shader types I had in this project were vertex and fragment shaders. Both of these shader programs do different things, the vertex shaders working on the actual points in the scene itself while the fragment shaders work more on the geometric pieces that connect the vertices.  Vertex shaders utilize position and vectors to implement things like displacement whereas fragment shaders give the scene's geometric pieces light and color. Together they allow for many kinds of ways to portray scenes.   <br><br>
+
+		The Blinn-Phong shading model gives a surface 3 kinds of lighting effects: diffuse, ambient, and specular. All three of these can be broken down, allowing for a great amount of individualized customization. It is a formula that I utilized for its own section, for bump mapping, and also for displacement. <br><br>
+		
+		<p>Blinn-Phone Shading Model With Various Lighting Effects </p>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="p5_bp_amb.png" width="400px"/>
+				  <figcaption>Only Ambient</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="p5_bp_diff.png" width="400px"/>
+				  <figcaption>Only Diffuse</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="p5_bp_spec.png" width="400px"/>
+				  <figcaption>Only Specular</figcaption>
+				</td>
+				<td style="text-align: center;">
+					<img src="p5_bp_all.png" width="400px"/>
+					<figcaption>Ambient, Diffuse, Specular</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
+		<br><br>
+
+		<p>Texture Mapping Shader: Pochacco at Disneyland Cloth</p>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="p5_pochacco1.png" width="400px"/>
+				  <figcaption></figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="p5_pochacco2.png" width="400px"/>
+				  <figcaption></figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
+		<br><br>
+
+		Bump mapping and displacement mapping are both ways of giving texture and depth to the surface of an object.  Bump mapping entails using a height map and the geometries of the scene to modify the surface's normals, affecting how light interacts with it.  Displacement mapping additionally changes the point's positions based on the height map, making actual bumps on the surface of the object.<br><br>
+		Bump mapping creates a render that gives a very nice illusion that the cloth has texture, but certain angles and closeups expose how it is not a real physical texture, just manipulations of light.  Displacement mapping actually produces the ridges on the object, working alongside the bumping to accentuate the texture of the object.  Its texture looks much more real, albeit much harsher.
+
+		<p>Bump Mapping and Displacement Mapping</p>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="p5_bump.png" width="400px"/>
+				  <figcaption>Bump Mapping</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="p5_disp.png" width="400px"/>
+				  <figcaption>Displacement Mapping</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
+		<br><br>
+
+		Below are examples of bump and displacement mapping with coarseness levels of 16 and 128.  In general, they resemble the idea of the original examples above; however, it can be seen that the models with higher coarseness look more refined and detailed than the lower coarseness ones. In general, both 128 ones look more smooth than the 16 ones, and both mapping methods seem to be affected in similar ways to the coarseness increase.  <br><br>
+		
+		<p>Bump and Displacement Mapping with 16, 128 Coarseness </p>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="p5_bump_16.png" width="400px"/>
+				  <figcaption>Bump, Coarseness 16</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="p5_disp_16.png" width="400px"/>
+				  <figcaption>Displacement, Coarseness 16</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="p5_bump_128.png" width="400px"/>
+				  <figcaption>Bump, Coarseness 128</figcaption>
+				</td>
+				<td style="text-align: center;">
+					<img src="p5_disp_128.png" width="400px"/>
+					<figcaption>Displacement, Coarseness 128</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
+		<br><br>
+
+		<p>Mirror Shader on Cloth and Sphere </p>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="p5_mirror_1.png" width="400px"/>
+				  <figcaption></figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="p5_mirror_2.png" width="400px"/>
+				  <figcaption></figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="p5_mirror_3.png" width="400px"/>
+				  <figcaption></figcaption>
+				</td>
+				<td style="text-align: center;">
+					<img src="p5_mirror_4.png" width="400px"/>
+					<figcaption></figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
+		<br><br>
+
+
+
 
 		</div>
 	</body>
