@@ -253,7 +253,93 @@
 		</div>
 
 		<h2>Part 4: Handling self-collisions</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		Handnling self-collisions naively takes O(n^2) time, so I used hash positions to more efficiently figure out if a point mass is colliding with another.  To do this, I hashed each point's position based on which 3d box they fell into after I partitioned the space.  This way, their closeness is estimated by space rather than in pairwise combinations.  Through this new spatial map, I can then use the hash table to compare each point mass with other's in its vicinity, adjusting it if they are touching (2*thickness distance).  For each point mass, this adjustment is calculated for all other close points, averaged and scaled down before applied.  This results in the cloth not falling in on itself and instead interacting with its own point masses.
+
+		<p>Cloth With Self Collision on a Plane </p>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="p4_selfcoll_1.png" width="400px"/>
+				  <figcaption>Self Collision Initial</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="p4_selfcoll_2.png" width="400px"/>
+				  <figcaption>Self Collision Falling</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="p4_selfcoll_3.png" width="400px"/>
+				  <figcaption>Self Collision Ground</figcaption>
+				</td>
+				<td style="text-align: center;">
+					<img src="p4_selfcoll_4.png" width="400px"/>
+					<figcaption>Self Collision Resting</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
+		<br><br>
+
+		The below examples show the cloth's collisions at 50 and 1 density (as opposed to the 15 density default).  The higher density cloth pressed down on itself more, flattening to the ground faster and more harshly.  The lower density one felt more floaty and did not condense on itself like the higher density one.  You can tell that the tension force in the bends/folds of the paper were more effective as the density was lower, because it wasn't forced down to the plane as much. 
+
+		<p>Cloth With Self Collision And 1, 50 Density (15 Original) </p>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="p4_dens_1.png" width="400px"/>
+				  <figcaption>Density 50</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="p4_dens_2.png" width="400px"/>
+				  <figcaption>Density 50</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="p4_dens_3.png" width="400px"/>
+				  <figcaption>Density 1</figcaption>
+				</td>
+				<td style="text-align: center;">
+					<img src="p4_dens_4.png" width="400px"/>
+					<figcaption>Density 1</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
+		<br><br>
+
+		The below examples show the cloth's collisions at 50000 and 500 spring constant values (as opposed to the 5000 density default).  The higher spring constant value made the cloth resist harsh and rigid folds, keeping a relatively smooth structure and not folding on itself so roughly.  The lower spring constant allowed the cloth to make these close, jagged folds as it fully fell in on itself vertically before spreading out horizontally.  The jagged folds as it hit the plane surface shows the difference best between both spring constants.
+
+		<p>Cloth With Self Collision And 500, 50000 Spring Constant (5000 Original) </p>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="p4_ks_1.png" width="400px"/>
+				  <figcaption>Spring Constant 50000</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="p4_ks_2.png" width="400px"/>
+				  <figcaption>Spring Constant 50000</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="p4_ks_3.png" width="400px"/>
+				  <figcaption>Spring Constant 500</figcaption>
+				</td>
+				<td style="text-align: center;">
+					<img src="p4_ks_4.png" width="400px"/>
+					<figcaption>Spring Constant 500</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
+		<br><br>
+		
 
 		<h2>Part 5: Shaders</h2>
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
